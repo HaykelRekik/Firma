@@ -18,8 +18,8 @@ class UserController extends Controller
             ];
         }
         $user = new User;
-        $user->Firstname = $request->Firstname;
-        $user->Lastname = $request->Lastname;
+        $user->Firstname = $request->firstname;
+        $user->Lastname = $request->lastname;
         $user->phone = $request->phone;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
@@ -27,7 +27,7 @@ class UserController extends Controller
         $response = [
             'msg' => 'User Succsefully created',
             'success' => 1,
-            'status' => 200
+            'status' => 201 //created response code
         ];
         return response()->json($response, $response['status']);
     }
