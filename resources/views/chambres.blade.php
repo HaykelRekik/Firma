@@ -8,7 +8,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <h5>Rooms
-                                <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#addnewroom"><span class="glyphicon glyphicon-plus"></span> Add
+                                <button class="btn btn-info pull-right" data-toggle="modal" data-target="#addnewroom"><span class="glyphicon glyphicon-plus"></span> Add
                                     New Room +</button>
                             </h5>
                         </div>

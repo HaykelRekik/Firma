@@ -8,14 +8,14 @@
                     <div class="row">
                         <div class="col-md-12">
                             <h5>Sensors
-                                <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#addsensor"><span class="glyphicon glyphicon-plus"></span> Add
+                                <button class="btn btn-info pull-right" data-toggle="modal" data-target="#addsensor"><span class="glyphicon glyphicon-plus"></span> Add
                                     New Sensor +</button>
                             </h5>
                         </div>
                     </div>
                 </div>
                 <div class="card-body ">
-                    <table class="table table-striped" id="getallsensors">
+                <table class="table table-striped" id="getallsensors">
                         <thead>
                             <tr>
                                 <th scope="col">Sensor ID</th>

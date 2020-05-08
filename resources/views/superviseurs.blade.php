@@ -8,7 +8,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <h5>Supervisors
-                                <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#adduser"><span class="glyphicon glyphicon-plus"></span> Add
+                                <button class="btn btn-info pull-right" data-toggle="modal" data-target="#adduser"><span class="glyphicon glyphicon-plus"></span> Add
                                     new client +</button>
                             </h5>
                         </div>

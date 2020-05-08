@@ -35,6 +35,7 @@
       </div>
       <div class="sidebar-wrapper" id="sidebar-wrapper">
         <ul class="nav">
+
           <li class="active ">
             <a href="home">
               <i class="now-ui-icons design_app"></i>
@@ -47,31 +48,6 @@
               <p>User Profile</p>
             </a>
           </li>
-          <li>
-            <a href="superviseurs">
-              <i class='fas fa-user-friends' style='font-size:20px'></i>
-              <p>Superviseurs</p>
-            </a>
-          </li>
-          <li>
-            <a href="chambres">
-              <i class='fas fa-home' style='font-size:20px'></i>
-              <p>Chambres</p>
-            </a>
-          </li>
-          <li>
-            <a href="capteurs">
-              <i class='fas fa-microchip' style='font-size:20px'></i>
-              <p>Capteurs</p>
-            </a>
-          </li>
-          <li>
-            <a href="notifications">
-              <i class='fas fa-bell' style='font-size:20px'></i>
-              <p>Notifications</p>
-            </a>
-          </li>
-
         </ul>
       </div>
     </div>

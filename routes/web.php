@@ -27,8 +27,9 @@ Route::get('/capteurs', 'HomeController@capteurs')->name('capteurs');
 Route::get('/notifications', 'HomeController@notifications')->name('notifications');
 Route::get('/editsuperviseurs', 'HomeController@editsuperviseurs')->name('editsuperviseurs');
 Route::get('/test', 'HomeController@test')->name('test');
-
+Route::get('/homec', 'HomeController@index2');
+Route::get('/dash', 'HomeController@dashview');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+
