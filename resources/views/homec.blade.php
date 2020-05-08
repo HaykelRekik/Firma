@@ -2,7 +2,6 @@
 @section('content')
 
 <div class="content" id="getuserrooms" >
-    <div >@{{ pass({{ Auth::user()->id }}) }}</div>
     <!-- ROOM CARD  -->
     <div class="card bg-white mb-4 text-center" style="max-width: 20rem;" >  
         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
