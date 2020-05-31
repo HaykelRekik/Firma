@@ -1,3 +1,4 @@
+Vue.prototype.$userId = document.querySelector("meta[name='user-id']").getAttribute('content');
 var vrc1 = new Vue({
 
     el: "#addnewroom",
@@ -32,22 +33,94 @@ var vrc2 = new Vue({
     el: "#getuserrooms",
     data: {
       rooms: [],
-      tt: 0
     },
-  
     methods: {
-        pass: function(id){
+      passid: function (id) { 
+        vrc3.roomid = id ;
+        vrc4.roomid = id ;
+      },
 
-           
-            alert("this is pass function" + id)
-        }
+      getid(room_id) {
+
+        
+      }
+
     },
   
     mounted() {
-    //   axios
-    //     .get('api/getallrooms')
-    //     .then(response => (this.rooms = response.data))
+      axios
+        .get('api/getrooms/' + this.$userId)
+        .then(response => (this.rooms = response.data))
     }
   
   
   });
+
+  // *************************************************************************
+var vrc3 = new Vue({
+
+  el: "#deleteroomc",
+
+  data: {
+    roomid: null
+  },
+
+  methods: {
+
+    deleteroom: function () {
+      axios.delete('api/deleteroom/' + this.roomid)
+      alert('you have successfully deleted the room ' + this.roomid);
+    }
+
+  },
+
+  mounted() {
+  }
+
+
+});
+
+//   ****************************************************************
+
+var vrc4 = new Vue({
+
+  el: "#editeroom",
+
+  data: {
+    roomid: null,
+    name: null
+  },
+
+  methods: {
+    editroom: function () {
+      axios.patch('api/updatename', {
+        room_id: this.roomid,
+        newname: this.name,
+      })
+    }
+
+
+  },
+
+  mounted() {
+  }
+
+});
+
+// *************************************************************************
+var vrc5 = new Vue({
+
+  el: "#testelem",
+
+  data: {
+    roomid: null,
+    name: "show"
+  },
+
+  methods: {
+  },
+
+  mounted() {
+  }
+
+});

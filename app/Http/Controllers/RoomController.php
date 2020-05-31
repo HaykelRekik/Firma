@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Room;
+use App\roomvalue;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -35,9 +36,9 @@ class RoomController extends Controller
        
     }
     }
-    public function getrooms(Request $request)
+    public function getrooms($user_id)
     {
-        $rooms = Room::where('user_id', $request->user_id)->get();
+        $rooms = Room::where('user_id', $user_id)->get();
        return response()->json($rooms, 200);
     
 
@@ -97,6 +98,21 @@ class RoomController extends Controller
         ];
         return response()->json($response, $response['status']);
     }
+
+    public function updatename(Request $request)
+    {
+        $room = Room::where('room_id', $request->room_id)
+        ->update(
+            [
+                'name' => $request->newname
+            ]);
+        $response = [
+            'msg' => 'room name has been succefuly updated',
+            'success' => 1,
+            'status' => 200,
+        ];
+        return response()->json($response, $response['status']);
+    }
     
     
     public function destroy($room_id)
@@ -115,7 +131,28 @@ class RoomController extends Controller
     $rooms = Room::all();
     return response()->json($rooms, 200);
     
-    }  
+    }
+    
+    public function getRoomdata($room_id){
+        $room_data=roomvalue::where('room_id',$room_id)->latest()->first();
+    
+        return response()->json($room_data);
+    }
+
+    public function createRoomdata(Request $request){
+       $roomvalue = new roomvalue();
+       $roomvalue->room_id = $request->room_id;
+       $roomvalue->temperature = $request->temperature;
+       $roomvalue->humidity = $request->humidity;
+       $roomvalue->motion = $request->motion;
+       $roomvalue->save();
+
+       return response()->json('room data created');
+
+
+    }
+
+
 }
 
 

@@ -18,8 +18,8 @@ class UserController extends Controller
             ];
         }
         $user = new User;
-        $user->Firstname = $request->firstname;
-        $user->Lastname = $request->lastname;
+        $user->Firstname = $request->Firstname;
+        $user->Lastname = $request->Lastname;
         $user->phone = $request->phone;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
