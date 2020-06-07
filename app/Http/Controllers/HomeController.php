@@ -32,11 +32,6 @@ class HomeController extends Controller
     }
     
 
-    public function dashview()
-    {
-        return view('dashboardc');
-    }
-
     public function user()
     {
     return view('user');

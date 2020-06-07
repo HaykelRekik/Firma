@@ -18,7 +18,7 @@ class CreateRoomvaluesTable extends Migration
             $table->integer('room_id');
             $table->float('temperature');
             $table->float('humidity');
-            $table->float('motion');
+            $table->string('motion');
             $table->timestamps();
         });
     }

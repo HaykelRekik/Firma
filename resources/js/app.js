@@ -1,11 +1,13 @@
 require('./bootstrap');
 
+
 window.Vue = require('vue');
+
 
 //support vuex
 
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component("HelloWorld", require('./components/HelloWorld.vue').default);
 
 
 const app = new Vue({
@@ -19,3 +21,5 @@ const app = new Vue({
 
 
 });
+
+

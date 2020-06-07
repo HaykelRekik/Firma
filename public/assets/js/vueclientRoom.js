@@ -1,4 +1,6 @@
 Vue.prototype.$userId = document.querySelector("meta[name='user-id']").getAttribute('content');
+
+
 var vrc1 = new Vue({
 
     el: "#addnewroom",
@@ -32,7 +34,7 @@ var vrc2 = new Vue({
 
     el: "#getuserrooms",
     data: {
-      rooms: [],
+      rooms: []
     },
     methods: {
       passid: function (id) { 
@@ -41,9 +43,11 @@ var vrc2 = new Vue({
       },
 
       getid(room_id) {
-
         
-      }
+        window.location.href ='/dash';
+        
+    
+       }
 
     },
   
@@ -108,19 +112,108 @@ var vrc4 = new Vue({
 });
 
 // *************************************************************************
-var vrc5 = new Vue({
 
-  el: "#testelem",
+var vrc6 = new Vue({
+
+  el: "#tempchart",
 
   data: {
-    roomid: null,
-    name: "show"
+    chart: null,
+    dates: [],
+    temps: [],
+    errored: false
   },
 
   methods: {
-  },
+    getData: function () {
+      // if (this.chart != null) {
+      //   this.chart.destroy();
+      // }
+      alert("hello from getdata");
+      axios
+        .get('api/getroom5mesures/1')
+        .then(response => {
+          this.dates = response.data.map(data => {
+            return data.created_at;
+          });
 
-  mounted() {
+          this.temps = response.data.map(data => {
+            return data.temperature;
+          });
+
+          var ctx = document.getElementById('myChart');
+          this.chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+              labels: this.dates,
+              datasets: [
+                {
+                  label: 'Avg. Temp',
+                  backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                  borderColor: 'rgb(54, 162, 235)',
+                  fill: false,
+                  data: this.temps
+                }
+              ]
+            },
+            options: {
+              title: {
+                display: true,
+                text: 'Temperature with Chart.js'
+              },
+              tooltips: {
+                callbacks: {
+                  label: function (tooltipItem, data) {
+                    var label = data.datasets[tooltipItem.datasetIndex].label || '';
+
+                    if (label) {
+                      label += ': ';
+                    }
+
+                    label += Math.floor(tooltipItem.yLabel);
+                    return label + '°F';
+                  }
+                }
+              },
+              scales: {
+                xAxes: [
+                  {
+                    type: 'time',
+                    time: {
+                      unit: 'hour',
+                      displayFormats: {
+                        hour: 'M/DD @ hA'
+                      },
+                      tooltipFormat: 'MMM. DD @ hA'
+                    },
+                    scaleLabel: {
+                      display: true,
+                      labelString: 'Date/Time'
+                    }
+                  }
+                ],
+                yAxes: [
+                  {
+                    scaleLabel: {
+                      display: true,
+                      labelString: 'Temperature (°F)'
+                    },
+                    ticks: {
+                      callback: function (value, index, values) {
+                        return value + '°F';
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          });
+        })
+        .catch(error => {
+          console.log(error);
+          this.errored = true;
+        })
+    }
   }
 
 });

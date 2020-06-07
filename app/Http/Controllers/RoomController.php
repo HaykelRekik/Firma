@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Room;
 use App\roomvalue;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -16,6 +17,7 @@ class RoomController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
 
     public function create(Request $request)
     {
@@ -40,15 +42,12 @@ class RoomController extends Controller
     {
         $rooms = Room::where('user_id', $user_id)->get();
        return response()->json($rooms, 200);
-    
 
     }
 
-    public function getroom(Request $request)
+    public function getroom($room_id)
     {
-        $room= Room::where('user_id', $request->user_id)
-        ->where('name', $request->name)
-        ->first();
+        $room= Room::where('room_id', $room_id)->first();
         if($room){
        return response()->json($room, 200);}
        else{
@@ -114,6 +113,37 @@ class RoomController extends Controller
         return response()->json($response, $response['status']);
     }
     
+
+    public function updatemxtemp(Request $request)
+    {
+         Room::where('room_id', $request->room_id)->update(
+            [
+                'maxtemperature' => $request->maxtemperature
+            ]);
+            $response = [
+                'msg' => 'room maxtemperature has been succefuly updated',
+                'success' => 1,
+                'status' => 200,
+            ];
+            return response()->json($response, $response['status']);
+
+    }
+
+    public function updatemxhum(Request $request)
+    {
+         Room::where('room_id', $request->room_id)->update(
+            [
+                'maxhumidity' => $request->maxhumidity
+            ]);
+            $response = [
+                'msg' => 'room maxhumidity has been succefuly updated',
+                'success' => 1,
+                'status' => 200,
+            ];
+            return response()->json($response, $response['status']);
+
+    }
+    
     
     public function destroy($room_id)
     {
@@ -133,10 +163,20 @@ class RoomController extends Controller
     
     }
     
+
     public function getRoomdata($room_id){
         $room_data=roomvalue::where('room_id',$room_id)->latest()->first();
-    
+
         return response()->json($room_data);
+       
+    }
+
+    public function get_last5_mesure($room_id){
+        $room_mesures=roomvalue::where('room_id',$room_id)->whereDate('created_at', Carbon::today())->get(); 
+
+
+        return response()->json($room_mesures);
+
     }
 
     public function createRoomdata(Request $request){
@@ -152,8 +192,10 @@ class RoomController extends Controller
 
     }
 
-
 }
+
+
+
 
 
 

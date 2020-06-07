@@ -14,9 +14,16 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
 Route::get('/admin', function () {
     return view('admin');
 });
+
+Route::get('/dash', function () {
+    return view('dashboardc');
+});
+
+
 
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -28,7 +35,6 @@ Route::get('/notifications', 'HomeController@notifications')->name('notification
 Route::get('/editsuperviseurs', 'HomeController@editsuperviseurs')->name('editsuperviseurs');
 Route::get('/test', 'HomeController@test')->name('test');
 Route::get('/homec', 'HomeController@index2');
-Route::get('/dash', 'HomeController@dashview')->name('dash');
 
 Auth::routes();
 
