@@ -42,11 +42,12 @@ var vrc2 = new Vue({
         vrc4.roomid = id ;
       },
 
-      getid(room_id) {
-        
-        window.location.href ='/dash';
-        
-    
+      getdash(room_id) {
+        axios
+        .get('http://127.0.0.1:8000/api/dash/' + room_id)
+        .then(res => {
+          console.log("faq");
+      })
        }
 
     },

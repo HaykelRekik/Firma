@@ -38,6 +38,16 @@ class RoomController extends Controller
        
     }
     }
+
+    public function dashboard($room_id)
+    {
+        // $data=roomvalue::where('room_id', $room_id)->first();
+        
+    return View('dashboardc',roomvalue::where('room_id',$room_id)->latest()->first());
+    
+    }
+    
+
     public function getrooms($user_id)
     {
         $rooms = Room::where('user_id', $user_id)->get();
@@ -171,12 +181,25 @@ class RoomController extends Controller
        
     }
 
-    public function get_last5_mesure($room_id){
-        $room_mesures=roomvalue::where('room_id',$room_id)->whereDate('created_at', Carbon::today())->get(); 
 
+    public function get_24h_mesure(){
+        $now= carbon::now();
+        $rooms = roomvalue::where('created_at', '>=', $now->subDay()->toDateTimeString())->get();
+    
+        return $rooms;
+    }
 
-        return response()->json($room_mesures);
-
+    public function get_7j_mesure(){
+        $now= carbon::now();
+        $rooms = roomvalue::where('created_at', '>=', $now->subDays(7)->toDateTimeString())->get();
+    
+        return $rooms;
+    }
+    public function get_30j_mesure(){
+        $now= carbon::now();
+        $rooms = roomvalue::where('created_at', '>=', $now->subDays(30)->toDateTimeString())->get();
+    
+        return $rooms;
     }
 
     public function createRoomdata(Request $request){
@@ -190,6 +213,55 @@ class RoomController extends Controller
        return response()->json('room data created');
 
 
+    }
+
+     /*
+     * PDF Generation Implementation
+     */
+
+    // Get Supervisors List For PDF File
+
+    public function getroomsval($days)
+        
+    {
+        $roomsdata = roomvalue::where('created_at', '>=', carbon::now()->subDay($days)->toDateTimeString())->get();
+        return $roomsdata;
+    }
+
+    public function pdf($days)
+    {
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->loadHTML($this->roomsDataToHtml($days));
+        return $pdf->stream("ROOMS_DATA.pdf", array("Attachment" => false));
+    }
+
+    public function roomsDataToHtml($days)
+    {
+        $roomsData = $this->getroomsval($days);
+        $output = '
+            <h3 align="center">Rooms Data</h3>
+            <table width="100%" style="border-collapse: collapse; border: 0px;">
+            <tr>
+                <th style="border: 1px solid; padding:12px;" width="30%">temperature</th>
+                <th style="border: 1px solid; padding:12px;" width="20%">humidity</th>
+                <th style="border: 1px solid; padding:12px;" width="20%">motion</th>
+                <th style="border: 1px solid; padding:12px;" width="30%">Created</th>
+            </tr>
+     ';
+        foreach ($roomsData as $roomData) {
+            $output .= '
+                <tr>
+                    <td style="border: 1px solid; padding:12px;">' . $roomData->temperature . '</td>
+                    <td style="border: 1px solid; padding:12px;">' . $roomData->humidity . '</td>
+                    <td style="border: 1px solid; padding:12px;">' . $roomData->motion . '</td>
+                    <td style="border: 1px solid; padding:12px;">' . $roomData->created_at->diffForHumans() . '</td>
+                    
+                </tr>
+      ';
+        }
+        $output .= '</table>';
+
+        return $output;
     }
 
 }

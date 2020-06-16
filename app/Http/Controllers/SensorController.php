@@ -15,7 +15,7 @@ class SensorController extends Controller
     public function index()
     {
         $sensors = sensor::all()
-               ->orderBy('name', )
+               ->orderBy('name')
                ->take(10)
                ->get();
         

@@ -20,7 +20,7 @@
                             <tr>
                                 <th scope="col">Id</th>
                                 <th scope="col">First Name</th>
-                                <th scope="col">First Name</th>
+                                <th scope="col">Last Name</th>
                                 <th scope="col">Email</th>
                                 <th scope="col">Phone</th>
                                 <th scope="col">Created_at</th>

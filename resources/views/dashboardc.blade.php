@@ -3,8 +3,8 @@
 
 <head>
     <meta charset="utf-8" />
-    <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
-    <link rel="icon" type="image/png" href="assets/img/favicon.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ URL::asset('assets/img/apple-icon.png') }}" >
+    <link rel="icon" type="image/png"  href="{{ URL::asset('assets/img/favicon.png') }}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>
         SmarTF
@@ -13,13 +13,13 @@
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-    <!-- CSS Files -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="assets/css/now-ui-dashboard.css?v=1.5.0" rel="stylesheet" />
+    <!-- CSS Files --> 
+    <link rel="stylesheet" href="{{ URL::asset('assets/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('assets/css/now-ui-dashboard.css?v=1.5.0') }}">
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 
-<body class="">
+<body>
     <div class="wrapper ">
         <div class="sidebar" data-color="red">
             <!--
@@ -45,7 +45,25 @@
                     <li>
                         <a href="user">
                             <i class="now-ui-icons users_single-02"></i>
-                            <p>User Profile</p>
+                            <p>User Profile </p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{route('printpdf',['$days'=>1])}}">
+                            <i style="font-size:24px" class="fa">&#xf1c1;</i>
+                            <p>PDF Last Days </p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{route('printpdf',['$days'=>7])}}">
+                            <i style="font-size:24px" class="fa">&#xf1c1;</i>
+                            <p>PDF Last 7 Days </p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{route('printpdf',['$days'=>30])}}">
+                            <i style="font-size:24px" class="fa">&#xf1c1;</i>
+                            <p>PDF Last 30 Days </p>
                         </a>
                     </li>
                 </ul>
@@ -112,9 +130,8 @@
                     </div>
                 </div>
             </nav>
-
-
-            <div class="panel-header panel-header-lg" id="testelem">
+            <div class="panel-header panel-header-lg" id="panel">
+                <meta name="room_id" content="{{ $room_id }}">
                 <div class="row mx-4">
                     <div class="col-xl-4 col-md-6 mb-4">
                         <div class="card h-100">
@@ -195,42 +212,22 @@
                             </div>
                         </div>
                     </div>
-                    <!-- <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card h-100">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-uppercase mb-1">Sales</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">650</div>
-                            <div class="mt-2 mb-0 text-muted text-xs">
-                                <span class="text-success mr-2"><i class="fas fa-arrow-up"></i> 12%</span>
-                                <span>Since last years</span>
-                            </div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-shopping-cart fa-2x text-success"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
                 </div>
             </div>
 
-            <div class="content">
+            <div class="content" id="content">
                 <div class="row mx-6" >
                     <div class="col-xl-6 col-lg-7">
                         <div class="card mb-4">
                             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                <h6 class="m-0 font-weight-bold text-primary">Temperature Chart</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Temperature Chart: @{{temp_title}}</h6>
                                 <div class="dropdown no-arrow">
-                                    <a class="dropdown-toggle btn btn-primary btn-sm" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <a class="dropdown-toggle btn btn-primary btn-sm" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Select Periode </a>
                                     <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(74px, 31px, 0px);">
-                                        <a class="dropdown-item" href="#">Today</a>
-                                        <a class="dropdown-item" href="#">Week</a>
-                                        <a class="dropdown-item active" href="#">Month</a>
-                                        <a class="dropdown-item" href="#">This Year</a>
+                                        <a class="dropdown-item" @click="get_1j_temp()"  >Today</a>
+                                        <a class="dropdown-item" @click="get_7j_temp()"  >Week</a>
+                                        <a class="dropdown-item" @click="get_30j_temp()" >Month</a>
                                     </div>
                                 </div>
                             </div>
@@ -253,16 +250,14 @@
                     <div class="col-xl-6 col-lg-7">
                         <div class="card mb-4 bg-white">
                             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                <h6 class="m-0 font-weight-bold text-primary">Humidity Chart</h6>
+                                <h6 class="m-0 font-weight-bold text-primary">Humidity Chart: @{{humi_title}} </h6>
                                 <div class="dropdown no-arrow">
-                                    <a class="dropdown-toggle btn btn-primary btn-sm" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Select Periode <i class="fas fa-chevron-down"></i>
-                                    </a>
+                                    <a class="dropdown-toggle btn btn-primary btn-sm" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Select Periode </a>
                                     <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(74px, 31px, 0px);">
-                                        <a class="dropdown-item" href="#">Today</a>
-                                        <a class="dropdown-item" href="#">Week</a>
-                                        <a class="dropdown-item active" href="#">Month</a>
-                                        <a class="dropdown-item" href="#">This Year</a>
+                                        <a class="dropdown-item" @click="get_1j_humi()"  >Today</a>
+                                        <a class="dropdown-item" @click="get_7j_humi()"  >Week</a>
+                                        <a class="dropdown-item" @click="get_30j_humi()" >Month</a>
                                     </div>
                                 </div>
                             </div>
@@ -309,27 +304,32 @@
                     </li>
                 </ul>
             </nav>
-
+      
         </div>
-    </footer>
-    </div>
-    </div>
-    <!--   Core JS Files   -->
-    <script src="assets/js/core/jquery.min.js"></script>
-    <script src="assets/js/core/popper.min.js"></script>
-    <script src="assets/js/core/bootstrap.min.js"></script>
-    <script src="assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-
-    <!-- Chart JS -->
-    <script src="assets/js/plugins/chartjs.min.js"></script>
-    <!--  Notifications Plugin    -->
-    <script src="assets/js/plugins/bootstrap-notify.js"></script>
-    <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
-    <script src="assets/js/now-ui-dashboard.min.js?v=1.5.0" type="text/javascript"></script>
-    <script src="https://unpkg.com/vue"></script>
-    <script src="https://unpkg.com/vuex"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="assets/js/vueclientApp.js"></script>
-</body>
-
-</html>
+      </footer>
+      </div>
+      </div>
+      <!--   Core JS Files   -->
+      <script src="{{ URL::asset('assets/js/core/jquery.min.js') }}"></script>
+      <script src="{{ URL::asset('assets/js/core/popper.min.js') }}"></script>
+      <script src="{{ URL::asset('assets/js/core/bootstrap.min.js') }}"></script>
+      <script src="{{ URL::asset('assets/js/plugins/perfect-scrollbar.jquery.min.js') }}"></script>
+      
+      <!-- Chart JS -->
+      <script src="https://unpkg.com/moment" ></script>
+      <script src="{{ URL::asset('assets/js/plugins/chartjs.min.js') }}" ></script>
+      <!--  Notifications Plugin    -->
+      {{-- <script  src="{{ URL::asset('assets/js/now-ui-dashboard.min.js?v=1.5.0') }}"></script> --}}
+      <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
+      {{-- <script src="{{ URL::asset('assets/js/now-ui-dashboard.min.js?v=1.5.0') }}" type="text/javascript"></script> --}}
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.1"></script>
+      <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@0.7.7"></script>
+      <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8"></script>
+      <script src="https://unpkg.com/vue"></script>
+      <script src="https://unpkg.com/vuex"></script>
+      <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+      <script src="{{ URL::asset('assets/js/vueclientApp.js') }}"></script>
+      </body>
+      
+      </html>

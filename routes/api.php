@@ -33,11 +33,16 @@ Route::patch('updatetemp', 'RoomController@updatemxtemp');
 Route::patch('updatehum', 'RoomController@updatemxhum'); 
 Route::get('getroomdata/{room_id}', 'RoomController@getRoomdata'); 
 Route::post('createroomdata', 'RoomController@createRoomdata'); 
-Route::get('getroom5mesures/{room_id}', 'RoomController@get_last5_mesure');   
+Route::get('getroom24hmesures/{room_id}', 'RoomController@get_24h_mesure');   
+Route::get('get_7j_mesure/{room_id}', 'RoomController@get_7j_mesure');   
+Route::get('get_30j_mesure/{room_id}', 'RoomController@get_30j_mesure');   
 Route::patch('updatename', 'RoomController@updatename'); 
 Route::post('restoreroom', 'RoomController@restore');
 Route::get('getallsensors', 'SensorController@getallsensors');
 Route::delete('deletesensor/{sensor_id}', 'SensorController@destroy');
 Route::patch('editsensor', 'SensorController@update');
 Route::post('createsensor', 'SensorController@create');
+Route::get('/dash/{room_id}', 'RoomController@dashboard')->name('dashb');
+Route::get('/RoomPdf/{days}', 'RoomController@pdf')->name('printpdf');
+
 
