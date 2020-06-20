@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRoomvaluesTable extends Migration
+class CreateTemperaturevalsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateRoomvaluesTable extends Migration
      */
     public function up()
     {
-        Schema::create('roomvalues', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->integer('room_id');
-            $table->float('temperature');
-            $table->float('humidity');
-            $table->string('motion');
+        Schema::create('Temperaturevals', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('sensor_id');
+            $table->integer('value');
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ class CreateRoomvaluesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('roomvalues');
+        Schema::dropIfExists('temperaturevals');
     }
 }

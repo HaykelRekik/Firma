@@ -108,7 +108,7 @@
                                 <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="now-ui-icons users_circle-08"></i>
                                     <p>
-                                        <span class="d-none d-md-block">Hello, </span>
+                                        <span class="d-none d-md-block">Hello, {{ Auth::user()->Firstname }} </span>
                                         <span class="d-lg-none d-md-block">Account</span>
                                     </p>
                                 </a>
@@ -276,6 +276,51 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="row " >
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-category">Room Stats</h5>
+                            <h4 class="card-title"> Last 5 Mesures</h4>
+                
+                        </div>
+                        <div class="card-body"  >
+                            <div class="table-responsive">
+                              <table class="table">
+                                <thead class=" text-primary">
+                                  <tr><th>
+                                   Temperature
+                                  </th>
+                                  <th>
+                                    humidity
+                                  </th>
+                                  <th>
+                                    motion
+                                  </th>
+                                  <th class="text-right">
+                                    Updated At
+                                  </th>
+                                </tr></thead>
+                                <tbody v-for="room5 in room5d ">
+                                  <tr>
+                                    <td>
+                                      @{{room5.temperature}} c°
+                                    </td>
+                                    <td>
+                                        @{{room5.humidity}} %
+                                    </td>
+                                    <td>
+                                        @{{room5.motion}}
+                                    </td>
+                                    <td class="text-right">
+                                        @{{room5.created_at}}
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                        </div>
+                      </div>
                 </div>
             </div>
         </div>

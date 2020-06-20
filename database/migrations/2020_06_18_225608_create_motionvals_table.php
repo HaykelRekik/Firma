@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSensorsTable extends Migration
+class CreateMotionvalsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateSensorsTable extends Migration
      */
     public function up()
     {
-        Schema::create('sensors', function (Blueprint $table) {
-            $table->bigIncrements('sensor_id');
-            $table->integer('room_id');
-            $table->string('reference');
-            $table->string('type');
+        Schema::create('Motionvals', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('sensor_id');
+            $table->boolean('value');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateSensorsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sensors');
+        Schema::dropIfExists('motionvals');
     }
 }

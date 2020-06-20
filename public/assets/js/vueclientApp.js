@@ -31,12 +31,6 @@ var vrc5 = new Vue({
 
     },
 
-    test: function () {
-      // if (this.chart != null) {
-      //   this.chart.destroy();
-      // }
-
-    },
     get_1j_temp: function () {
       if (this.tempchart != null) {
         this.tempchart.destroy();
@@ -185,7 +179,6 @@ var vrc5 = new Vue({
       .then(response => (this.roomd = response.data))
 
 
-
   }
 
 
@@ -211,7 +204,8 @@ var vrc6 = new Vue({
     roomv: [],
     roomd: [],
     maxhumidity: [],
-    maxtemperature: []
+    maxtemperature: [],
+    room5d:[]
   },
 
   methods: {
@@ -623,7 +617,12 @@ var vrc6 = new Vue({
   },
 
   mounted() {
+    axios.get('http://127.0.0.1:8000/api/getLast5Records/' + this.$ROOM_ID)
+    .then(response => (this.room5d = response.data))
 
   }
 
 });
+
+
+

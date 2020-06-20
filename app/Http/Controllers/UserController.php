@@ -23,6 +23,8 @@ class UserController extends Controller
         $user->phone = $request->phone;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
+        $user->email = $request->email;
+        $user->type = $request->type;
         $user->save();
         $response = [
             'msg' => 'User Succsefully created',
@@ -45,6 +47,7 @@ class UserController extends Controller
                 'Firstname' => $user->Firstname,
                 'Lastname' => $user->Lastname,
                 'phone' => $user->phone,
+                'type' => $user->type,
                 'email' => $user->email,
                 'created_at' => $user->created_at,
                 'status' => 200,
@@ -68,6 +71,7 @@ class UserController extends Controller
                 'Firstname' => $request->Firstname,
                 'Lastname' => $request->Lastname,
                 'phone' => $request->phone,
+                'type' => $request->type,
                 'email' => $request->email,
                 'password' =>bcrypt($request->password)
             ]);

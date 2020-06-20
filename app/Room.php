@@ -13,9 +13,6 @@ class Room extends Model
         'maxtemperature',
         'maxhumidity',
        
-        
-        
-
     ];
 //     public function user()
 //     {

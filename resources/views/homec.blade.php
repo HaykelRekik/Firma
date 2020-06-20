@@ -143,9 +143,7 @@
                             <div class="h5 mb-0 font-weight-bold text-gray-800">@{{ room.name }}</div>
                         </h5>
                     </div>
-                    {{-- <a  class="btn btn-danger btn-icon-split" @click="getdash(room.room_id)"> --}}
-                    <a  class="btn btn-danger btn-icon-split" href="{{route('dashb',['$room_id'=>1])}}">
-                        
+                    <a  class="btn btn-danger btn-icon-split" @click="getsensors(room.room_id)">          
                         <span class="icon text-white-50">
                             <i class="fas fa-arrow-right"></i>
                         </span>

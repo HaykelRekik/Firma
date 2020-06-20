@@ -89,7 +89,7 @@ var vr3 = new Vue({
         room_id: this.roomid,
         newname: this.name,
         maxtemperature: this.maxtemperature,
-        maxhumidity: this.maxtemperature,
+        maxhumidity: this.maxhumidity,
 
       })
     }
@@ -255,6 +255,5 @@ var vs4 = new Vue({
   }
 
 });
-
 
 

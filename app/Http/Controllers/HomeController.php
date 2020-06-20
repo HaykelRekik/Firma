@@ -62,7 +62,15 @@ class HomeController extends Controller
     
     }
 
-    
-    
+    public function admin(Request $request)
+    {
+        return view('home')->withMessage("admin");
+    }
+
+    public function superviseursad(Request $request)
+    {
+        return view('superviseurs')->withMessage("admin");
+    }
+
     }
     

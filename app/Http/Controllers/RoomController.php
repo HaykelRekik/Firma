@@ -39,11 +39,11 @@ class RoomController extends Controller
     }
     }
 
-    public function dashboard($room_id)
+    public function RoomsSensorsUser($room_id)
     {
         // $data=roomvalue::where('room_id', $room_id)->first();
         
-    return View('dashboardc',roomvalue::where('room_id',$room_id)->latest()->first());
+    return View('RoomsSensorsUser')->with('room_id', $room_id);
     
     }
     
@@ -54,6 +54,7 @@ class RoomController extends Controller
        return response()->json($rooms, 200);
 
     }
+    
 
     public function getroom($room_id)
     {
@@ -85,9 +86,9 @@ class RoomController extends Controller
      * @param  \App\Room  $room
      * @return \Illuminate\Http\Response
      */
-    public function show(Room $room)
+    public function show($id)
     {
-        //
+        
     }
 
 
@@ -221,48 +222,7 @@ class RoomController extends Controller
 
     // Get Supervisors List For PDF File
 
-    public function getroomsval($days)
-        
-    {
-        $roomsdata = roomvalue::where('created_at', '>=', carbon::now()->subDay($days)->toDateTimeString())->get();
-        return $roomsdata;
-    }
-
-    public function pdf($days)
-    {
-        $pdf = \App::make('dompdf.wrapper');
-        $pdf->loadHTML($this->roomsDataToHtml($days));
-        return $pdf->stream("ROOMS_DATA.pdf", array("Attachment" => false));
-    }
-
-    public function roomsDataToHtml($days)
-    {
-        $roomsData = $this->getroomsval($days);
-        $output = '
-            <h3 align="center">Rooms Data</h3>
-            <table width="100%" style="border-collapse: collapse; border: 0px;">
-            <tr>
-                <th style="border: 1px solid; padding:12px;" width="30%">temperature</th>
-                <th style="border: 1px solid; padding:12px;" width="20%">humidity</th>
-                <th style="border: 1px solid; padding:12px;" width="20%">motion</th>
-                <th style="border: 1px solid; padding:12px;" width="30%">Created</th>
-            </tr>
-     ';
-        foreach ($roomsData as $roomData) {
-            $output .= '
-                <tr>
-                    <td style="border: 1px solid; padding:12px;">' . $roomData->temperature . '</td>
-                    <td style="border: 1px solid; padding:12px;">' . $roomData->humidity . '</td>
-                    <td style="border: 1px solid; padding:12px;">' . $roomData->motion . '</td>
-                    <td style="border: 1px solid; padding:12px;">' . $roomData->created_at->diffForHumans() . '</td>
-                    
-                </tr>
-      ';
-        }
-        $output .= '</table>';
-
-        return $output;
-    }
+   
 
 }
 

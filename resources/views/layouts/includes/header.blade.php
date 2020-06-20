@@ -41,12 +41,7 @@
               <p>Dashboard</p>
             </a>
           </li>
-          <li>
-            <a href="user">
-              <i class="now-ui-icons users_single-02"></i>
-              <p>User Profile</p>
-            </a>
-          </li>
+
           <li>
             <a href="superviseurs">
               <i class='fas fa-user-friends' style='font-size:20px'></i>
@@ -71,7 +66,6 @@
               <p>Notifications</p>
             </a>
           </li>
-
         </ul>
       </div>
     </div>

@@ -45,7 +45,7 @@
   <script src="https://unpkg.com/vuex"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="assets/js/vueApp.js"></script>
-  <script src="assets/js/vueRoom.js"></script>
+  <script src="assets/js/Room.js"></script>
 </body>
 
 </html>
