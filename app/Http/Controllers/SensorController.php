@@ -9,6 +9,7 @@ use App\Motionval;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
+
 class SensorController extends Controller
 {
     /**
@@ -284,7 +285,7 @@ class SensorController extends Controller
                     <td style="border: 1px solid; padding:12px;">' . $val->id . '</td>
                     <td style="border: 1px solid; padding:12px;">' . $val->sensor_id . '</td>
                     <td style="border: 1px solid; padding:12px;">' . $val->value . '</td>
-                    <td style="border: 1px solid; padding:12px;">' . $val->created_at->diffForHumans() . '</td>
+                    <td style="border: 1px solid; padding:12px;">' . $val->created_at . '</td>
                     
                 </tr>
       ';
@@ -294,3 +295,6 @@ class SensorController extends Controller
         return $output;
     }
 }
+
+
+    

@@ -72,5 +72,6 @@ class HomeController extends Controller
         return view('superviseurs')->withMessage("admin");
     }
 
+
     }
     
