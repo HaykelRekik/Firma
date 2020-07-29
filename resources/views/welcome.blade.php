@@ -3,9 +3,11 @@
 
 <head>
     <meta charset="utf-8">
+    <link rel="apple-touch-icon" sizes="76x76" href="assets/img/nx.png">
+    <link rel="icon" type="image/png" href="assets/img/nx.png">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>SmarTF</title>
+    <title>NEXT MOVE</title>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -15,6 +17,7 @@
         html,
         body {
             background-color: #fff;
+            background-image: url("assets/img/welcom_img.jpg");
             color: #636b6f;
             font-family: 'Nunito', sans-serif;
             font-weight: 200;
@@ -39,6 +42,12 @@
         .top-right {
             position: absolute;
             right: 10px;
+            top: 18px;
+        }
+
+        .top-left {
+            position: absolute;
+            left: 10px;
             top: 18px;
         }
 
@@ -81,10 +90,13 @@
             @endauth
         </div>
         @endif
+        <div class="top-left">
+        <img src="assets/img/nx.png" alt="next move logo" width="50" height="50">
+        </div>
 
         <div class="content" id="app">
             <div class="title m-b-md">
-                SmarTF
+            <img src="assets/img/NEXT MOVE.png" alt="next move logo" width="600" height="600">
             </div>
         </div>
     </div>

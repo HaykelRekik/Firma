@@ -273,19 +273,19 @@ class SensorController extends Controller
             <h3 align="center">Sensors Data</h3>
             <table width="100%" style="border-collapse: collapse; border: 0px;">
             <tr>
-                <th style="border: 1px solid; padding:12px;" width="30%">ID</th>
-                <th style="border: 1px solid; padding:12px;" width="20%">Sensor ID</th>
-                <th style="border: 1px solid; padding:12px;" width="20%">Value</th>
-                <th style="border: 1px solid; padding:12px;" width="30%">Created</th>
+                <th style="border: 1px solid; padding:1px;" width="30%">ID</th>
+                <th style="border: 1px solid; padding:1px;" width="20%">Sensor ID</th>
+                <th style="border: 1px solid; padding:1px;" width="20%">Value</th>
+                <th style="border: 1px solid; padding:1px;" width="30%">Created</th>
             </tr>
      ';
         foreach ($sensorData as $val) {
             $output .= '
                 <tr>
-                    <td style="border: 1px solid; padding:12px;">' . $val->id . '</td>
-                    <td style="border: 1px solid; padding:12px;">' . $val->sensor_id . '</td>
-                    <td style="border: 1px solid; padding:12px;">' . $val->value . '</td>
-                    <td style="border: 1px solid; padding:12px;">' . $val->created_at . '</td>
+                    <td style="border: 1px solid; padding:1px;">' . $val->id . '</td>
+                    <td style="border: 1px solid; padding:1px;">' . $val->sensor_id . '</td>
+                    <td style="border: 1px solid; padding:1px;">' . $val->value . '</td>
+                    <td style="border: 1px solid; padding:1px;">' . $val->created_at . '</td>
                     
                 </tr>
       ';

@@ -53,3 +53,4 @@ Route::get('/sensorPdf/{sensor_id}/{days}', 'SensorController@pdf');
 
 
 
+
