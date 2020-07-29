@@ -27,7 +27,7 @@
                -->
             <div class="logo">
                 <a href="home" class="simple-text logo-mini">
-                    SF
+                <img src="assets/img/nx.png" alt="next move logo" width="100" height="35">
                 </a>
                 <a href="home" class="simple-text logo-normal">
                     NEXT MOVE
