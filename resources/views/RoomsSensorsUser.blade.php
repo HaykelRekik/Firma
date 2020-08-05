@@ -3,8 +3,8 @@
 
 <head>
   <meta charset="utf-8" />
-  <link rel="apple-touch-icon" sizes="76x76" href="assets/img/nx.png">
-  <link rel="icon" type="image/png" href="assets/img/nx.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="{{ URL::asset('assets/img/nx.png') }}">
+  <link rel="icon" type="image/png" href="{{ URL::asset('assets/img/nx.png') }}">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
      NEXT MOVE
@@ -26,44 +26,25 @@
         Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
     -->
       <div class="logo">
-        <a href="home" class="simple-text logo-mini">
-        <img src="assets/img/nx.png" alt="next move logo" width="100" height="35">SF
+        <a href="{{ URL::asset('homec') }}" class="simple-text logo-mini">
+        <img src="{{ URL::asset('assets/img/nx.png') }}" alt="next move logo" width="100" height="35">SF
         </a>
-        <a href="home" class="simple-text logo-normal">
+        <a href="{{ URL::asset('homec') }}" class="simple-text logo-normal">
          NEXT MOVE
         </a>
       </div>
       <div class="sidebar-wrapper" id="sidebar-wrapper">
         <ul class="nav">
           <li class="active ">
-            <a href="home">
+            <a href="{{ URL::asset('homec') }}">
               <i class="now-ui-icons design_app"></i>
               <p>Dashboard</p>
             </a>
           </li>
-
           <li>
-            <a href="superviseurs">
-              <i class='fas fa-user-friends' style='font-size:20px'></i>
-              <p>Superviseurs</p>
-            </a>
-          </li>
-          <li>
-            <a href="chambres">
-              <i class='fas fa-home' style='font-size:20px'></i>
-              <p>Chambres</p>
-            </a>
-          </li>
-          <li>
-            <a href="capteurs">
-              <i class='fas fa-microchip' style='font-size:20px'></i>
-              <p>Capteurs</p>
-            </a>
-          </li>
-          <li>
-            <a href="notifications">
-              <i class='fas fa-bell' style='font-size:20px'></i>
-              <p>Notifications</p>
+            <a href="{{ URL::asset('user') }}">
+              <i class="now-ui-icons users_single-02"></i>
+              <p>User Profile</p>
             </a>
           </li>
         </ul>
@@ -113,7 +94,7 @@
                   </p>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item" href="user"><i class="now-ui-icons ui-2_settings-90"></i> Edit
+                  <a class="dropdown-item" href="{{ URL::asset('user') }}"><i class="now-ui-icons ui-2_settings-90"></i> Edit
                     Profile</a>
                   <a class="dropdown-item text-danger" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -175,7 +156,7 @@
                                 <td>@{{sensor.max_value}}</td>
                                 <td>@{{sensor.created_at}}</td>
                                 <td>
-                                <button class="btn btn-success " @click="passsid(sensor.sensor_id)" data-toggle="modal" data-target="#editsensor"><i class='fas fa-wrench'></i></button>
+                                <button class="btn btn-success " @click="passsid(sensor.sensor_id,sensor.max_value)" data-toggle="modal" data-target="#editsensor"><i class='fas fa-wrench'></i></button>
                                 
                                 </td>
                             </tr>
@@ -226,7 +207,7 @@
         <div class="modal-content">
             <!--Header-->
             <div class="modal-header text-center">
-                <h4 class="modal-title white-text w-100 font-weight-bold py-2">Edit Sensor of ID: @{{sensor_id}}</h4>
+                <h4 class="modal-title white-text w-100 font-weight-bold py-2">Edit Sensor of ID: @{{sensor_id}} </h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true" class="white-text">&times;</span>
                 </button>

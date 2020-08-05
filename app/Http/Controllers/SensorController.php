@@ -8,6 +8,7 @@ use App\Humidityval;
 use App\Motionval;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use PDF;
 
 
 class SensorController extends Controller
@@ -262,39 +263,18 @@ class SensorController extends Controller
     public function pdf($sensor_id, $days)
     {
         $pdf = \App::make('dompdf.wrapper');
-        $pdf->loadHTML($this->roomsDataToHtml($sensor_id, $days));
-        return $pdf->stream("SENSOR_DATA.pdf", array("Attachment" => false));
-    }
-
-    public function roomsDataToHtml($sensor_id, $days)
-    {
+        $now= carbon::now();
         $sensorData = $this->getroomsval($sensor_id, $days);
-        $output = '
-            <h3 align="center">Sensors Data</h3>
-            <table width="100%" style="border-collapse: collapse; border: 0px;">
-            <tr>
-                <th style="border: 1px solid; padding:1px;" width="30%">ID</th>
-                <th style="border: 1px solid; padding:1px;" width="20%">Sensor ID</th>
-                <th style="border: 1px solid; padding:1px;" width="20%">Value</th>
-                <th style="border: 1px solid; padding:1px;" width="30%">Created</th>
-            </tr>
-     ';
-        foreach ($sensorData as $val) {
-            $output .= '
-                <tr>
-                    <td style="border: 1px solid; padding:1px;">' . $val->id . '</td>
-                    <td style="border: 1px solid; padding:1px;">' . $val->sensor_id . '</td>
-                    <td style="border: 1px solid; padding:1px;">' . $val->value . '</td>
-                    <td style="border: 1px solid; padding:1px;">' . $val->created_at . '</td>
-                    
-                </tr>
-      ';
-        }
-        $output .= '</table>';
-
-        return $output;
+        $pdf = PDF::loadView('records', compact('sensorData','now'));
+        return $pdf->stream("records.pdf");
     }
+
 }
+
+
+
+
+
 
 
     

@@ -11,6 +11,7 @@ use App\User;
 use App\Temperatureval;
 use App\Humidityval;
 use App\Motionval;
+use App\Depassed;
 use Carbon\Carbon;
 
 class alert extends Command
@@ -53,32 +54,62 @@ class alert extends Command
         $last30min = Temperatureval:: where('created_at' ,'>',$now->subMinutes(30)->toDateTimeString())->get();
 
         foreach($last30min as $mesure){
-            //get the max_value from sensors table 
             $sensor=Sensor::where('sensor_id',$mesure->sensor_id )->first(); 
-
-            //figure out if the temperature value measured passed the max value defined in the sensors table
-            if($mesure->value >= $sensor->max_value ){
-                $room=Room::where('room_id',$sensor->room_id)->first();
-                $user=User::where('id',$room->user_id)->first();
-                //send email to user 
-                Mail::to($user->email)->send(new MxTempMail($user,$mesure,$sensor,$room));
+            $depassed = Depassed::where('sensor_id',$mesure->sensor_id)->first();
+            if($depassed){
+                if($mesure->value >= $sensor->max_value ){
+                    if($depassed->created_at < $now->subHour()->toDateTimeString()){
+                        $room=Room::where('room_id',$sensor->room_id)->first();
+                        $user=User::where('id',$room->user_id)->first();
+                        
+                        //send email to user 
+                        Mail::to($user->email)->send(new MxTempMail($user,$mesure,$sensor,$room));
+                        Depassed::where('sensor_id',$depassed->sensor_id)->delete();
+                    }
+                }
+                else {
+                    Depassed::where('sensor_id',$mesure->sensor_id)->delete();
+                }
             }
-        }
-
+            else {
+                if($mesure->value >= $sensor->max_value ){
+                    $depassed = new Depassed();
+                    $depassed->sensor_id = $mesure->sensor_id;
+                    $depassed->value = $mesure->value;
+                    $depassed-> save();
+                }
+            }
+        }    
+        
+        // get the last 30 minute measure 
         $last30min = Humidityval:: where('created_at' ,'>',$now->subMinutes(30)->toDateTimeString())->get();
 
         foreach($last30min as $mesure){
-            //get the max_value from sensors table 
             $sensor=Sensor::where('sensor_id',$mesure->sensor_id )->first(); 
-
-            //figure out if the temperature value measured passed the max value defined in the sensors table
-            if($mesure->value >= $sensor->max_value ){
-                $room=Room::where('room_id',$sensor->room_id)->first();
-                $user=User::where('id',$room->user_id)->first();
-                //send email to user 
-                Mail::to($user->email)->send(new MxTempMail($user,$mesure,$sensor,$room));
+            $depassed = Depassed::where('sensor_id',$mesure->sensor_id)->first();
+            if($depassed){
+                if($mesure->value >= $sensor->max_value ){
+                    if($depassed->created_at < $now->subHour()->toDateTimeString()){
+                        $room=Room::where('room_id',$sensor->room_id)->first();
+                        $user=User::where('id',$room->user_id)->first();
+                        
+                        //send email to user 
+                        Mail::to($user->email)->send(new MxTempMail($user,$mesure,$sensor,$room));
+                        Depassed::where('sensor_id',$depassed->sensor_id)->delete();
+                    }
+                }
+                else {
+                    Depassed::where('sensor_id',$mesure->sensor_id)->delete();
+                }
+            }
+            else {
+                if($mesure->value >= $sensor->max_value ){
+                    $depassed = new Depassed();
+                    $depassed->sensor_id = $mesure->sensor_id;
+                    $depassed->value = $mesure->value;
+                    $depassed-> save();
+                }
             }
         }
-        
     }
 }

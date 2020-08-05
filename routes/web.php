@@ -36,6 +36,7 @@ Route::get('/editsuperviseurs', 'HomeController@editsuperviseurs')->name('editsu
 Route::get('/homec', 'HomeController@index2');
 Route::get('/RoomsSensorsUser/{room_id}', 'RoomController@RoomsSensorsUser')->name('dashb');
 Route::get('/roomssensors/{room_id}', 'SensorController@roomssensorsview');
+Route::get('/pdf/{sensor_id}/{days}', 'SensorController@pdfview');
 
 
 

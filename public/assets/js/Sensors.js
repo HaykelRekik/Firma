@@ -45,11 +45,13 @@ var AllRoomSensors = new Vue({
     get_30j_pdf: function (sensor_id){
       axios
        .get('http://127.0.0.1:8000/api/sensorPdf/'+sensor_id+'/30')
+
     },
 
-    passsid: function (sensor_id) {
+    passsid: function (sensor_id,maxval) {
       DeleteSensor.sensor_id = sensor_id;
       EditSensor.sensor_id = sensor_id;
+      EditSensor.max_value = maxval;
     },
 
 

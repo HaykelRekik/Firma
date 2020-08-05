@@ -39,8 +39,8 @@ class MxTempMail extends Mailable
      */
     public function build()
     {
-        return $this->from('NextMove@gmail.com')
-                    ->markdown('email.TempMail')
+        
+        return $this->markdown('email.TempMail')
                     ->with([
                         'username'=> $this->user->Firstname,
                         'value'=> $this->mesure->value,
