@@ -29,22 +29,89 @@ var AllRoomSensors = new Vue({
     daychart: [],
     dates: [],
     value: [],
-    errored: []
+    errored: [],
+    fromdate: [],
+    todate: []
   },
 
   methods: {
  
     get_1j_pdf: function (sensor_id){
-      axios
-       .get('http://127.0.0.1:8000/api/sensorPdf/'+sensor_id+'/1')
+      axios({
+        url: 'http://127.0.0.1:8000/api/sensorPdf/' + sensor_id + '/1',
+        method: 'GET',
+        responseType: 'blob', // important
+      }).then((response) => {
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', 'file.pdf');
+        document.body.appendChild(link);
+        link.click();
+      });
+
     },
     get_7j_pdf: function (sensor_id){
-      axios
-       .get('http://127.0.0.1:8000/api/sensorPdf/'+sensor_id+'/7')
+
+       axios({
+        url: 'http://127.0.0.1:8000/api/sensorPdf/'+sensor_id+'/7',
+        method: 'GET',
+        responseType: 'blob', // important
+      }).then((response) => {
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', 'file.pdf');
+        document.body.appendChild(link);
+        link.click();
+      });
     },
     get_30j_pdf: function (sensor_id){
-      axios
-       .get('http://127.0.0.1:8000/api/sensorPdf/'+sensor_id+'/30')
+
+       axios({
+        url: 'http://127.0.0.1:8000/api/sensorPdf/'+sensor_id+'/30',
+        method: 'GET',
+        responseType: 'blob', // important
+      }).then((response) => {
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', 'file.pdf');
+        document.body.appendChild(link);
+        link.click();
+      });
+
+    },
+    get_total_pdf: function (sensor_id){
+       axios({
+        url: 'http://127.0.0.1:8000/api/sensorPdftotal/'+sensor_id,
+        method: 'GET',
+        responseType: 'blob', // important
+      }).then((response) => {
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', 'file.pdf');
+        document.body.appendChild(link);
+        link.click();
+      });
+
+    },
+
+    get_custom_pdf: function (sensor_id){
+       axios({
+        url: 'http://127.0.0.1:8000/api/sensorPdfcustom/' + sensor_id + '/' + this.fromdate + '/' + this.todate ,
+        method: 'GET',
+        responseType: 'blob', // important
+      }).then((response) => {
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', 'file.pdf');
+        document.body.appendChild(link);
+        link.click();
+      });
+
 
     },
 

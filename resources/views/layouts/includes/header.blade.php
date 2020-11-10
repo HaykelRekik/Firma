@@ -41,11 +41,16 @@
               <p>Dashboard</p>
             </a>
           </li>
-
+          <li>
+            <a href="user">
+              <i class='fas fa-user-friends' style='font-size:20px'></i>
+              <p>Modifier le profile</p>
+            </a>
+          </li>
           <li>
             <a href="superviseurs">
               <i class='fas fa-user-friends' style='font-size:20px'></i>
-              <p>Superviseurs</p>
+              <p>Utilisateur</p>
             </a>
           </li>
           <li>
@@ -113,12 +118,11 @@
                   </p>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item" href="user"><i class="now-ui-icons ui-2_settings-90"></i> Edit
-                    Profile</a>
+                  <a class="dropdown-item" href="user"><i class="now-ui-icons ui-2_settings-90"></i> Modifier le profile</a>
                   <a class="dropdown-item text-danger" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                     <i class="now-ui-icons ui-1_lock-circle-open"></i>
-                    {{ __('Log-out') }}
+                    {{ __('Déconnexion') }}
                   </a>
 
                   <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

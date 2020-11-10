@@ -46,6 +46,8 @@
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="assets/js/vueApp.js"></script>
   <script src="assets/js/Room.js"></script>
+  <script src="assets/js/Sensors.js"></script>
+
 </body>
 
 </html>

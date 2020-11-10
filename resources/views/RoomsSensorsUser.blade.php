@@ -44,7 +44,7 @@
           <li>
             <a href="{{ URL::asset('user') }}">
               <i class="now-ui-icons users_single-02"></i>
-              <p>User Profile</p>
+              <p>Modifier le profile</p>
             </a>
           </li>
         </ul>
@@ -94,12 +94,11 @@
                   </p>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item" href="{{ URL::asset('user') }}"><i class="now-ui-icons ui-2_settings-90"></i> Edit
-                    Profile</a>
+                  <a class="dropdown-item" href="{{ URL::asset('user') }}"><i class="now-ui-icons ui-2_settings-90"></i> Modifier le profile</a>
                   <a class="dropdown-item text-danger" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                     <i class="now-ui-icons ui-1_lock-circle-open"></i>
-                    {{ __('Log-out') }}
+                    {{ __('Déconnexion') }}
                   </a>
 
                   <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -121,7 +120,7 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-md-12">
-                            <h5>Sensors of Room ID: {{$room_id}} </h5>
+                            <h5>Capteurs de chambre: {{$room_id}} </h5>
                         </div>
                     </div>
                 </div>
@@ -129,12 +128,12 @@
                 <table class="table table-striped" id="getallsensors">
                         <thead>
                             <tr>
-                                <th >Sensor ID</th>
+                                <th >Capteur ID</th>
                                 <th scope="col">Type</th>
                                 <th scope="col">Chart</th>
                                 <th scope="col">PDF</th>
-                                <th scope="col">Max_Value</th>
-                                <th scope="col">created_at</th>                           
+                                <th scope="col">Max_Valeur</th>
+                                <th scope="col">Ajouter_le</th>                           
                                 <th scope="col">Actions</th>
                             </tr>
                         </thead>
@@ -147,9 +146,15 @@
                                   <div class="dropdown no-arrow">
                                   <button class="btn btn-danger" @click="passsid(sensor.sensor_id)" data-toggle="dropdown"id="dropdownMenuLink" data-target="#showpdf"><i style="font-size:20px" class="fa">&#xf1c1;</i> </button>
                                   <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(74px, 31px, 0px);">
-                                    <a class="dropdown-item" @click="get_1j_pdf(sensor.sensor_id)"  >Today</a>
-                                    <a class="dropdown-item" @click="get_7j_pdf(sensor.sensor_id)"  >Week</a>
-                                    <a class="dropdown-item" @click="get_30j_pdf(sensor.sensor_id)" >Month</a>
+                                    <a class="dropdown-item" @click="get_1j_pdf(sensor.sensor_id)"  >Aujourd'hui</a>
+                                    <a class="dropdown-item" @click="get_7j_pdf(sensor.sensor_id)"  >Semaine</a>
+                                    <a class="dropdown-item" @click="get_30j_pdf(sensor.sensor_id)" >Mois</a>
+                                    <a class="dropdown-item" @click="get_total_pdf(sensor.sensor_id)" >Total</a>
+                                    <a class="dropdown-item" @click="get_custom_pdf(sensor.sensor_id)" >Custom</a>
+                                    <label data-error="wrong" data-success="right" for="form3">from</label>
+                                    <input class="form-control" v-model="fromdate" type="date" value="2011-08-19" id="example-date-input">  
+                                    <label data-error="wrong" data-success="right" for="form3">to</label>
+                                    <input class="form-control" v-model="todate" type="date" value="2011-08-19" id="example-date-input">         
                                 </div>
 
                                 </td>
@@ -177,14 +182,14 @@
 
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title w-100" id="myModalLabel">Sensor of ID: @{{sensor_id}}---->@{{title}}</h4>
+        <h4 class="modal-title w-100" id="myModalLabel"> @{{sensor_id}}---->@{{title}}</h4>
         <div class="dropdown no-arrow">
           <a class="dropdown-toggle btn btn-primary btn-sm" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Select Periode </a>
+              Sélectionnez la Periode </a>
           <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(74px, 31px, 0px);">
-              <a class="dropdown-item" @click="get_1j_values()"  >Today</a>
-              <a class="dropdown-item" @click="get_7j_values()"  >Week</a>
-              <a class="dropdown-item" @click="get_30j_values()" >Month</a>
+              <a class="dropdown-item" @click="get_1j_values()"  >Aujourd'hui</a>
+              <a class="dropdown-item" @click="get_7j_values()"  >Semaine</a>
+              <a class="dropdown-item" @click="get_30j_values()" >Mois</a>
           </div>
         </div>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -207,7 +212,7 @@
         <div class="modal-content">
             <!--Header-->
             <div class="modal-header text-center">
-                <h4 class="modal-title white-text w-100 font-weight-bold py-2">Edit Sensor of ID: @{{sensor_id}} </h4>
+                <h4 class="modal-title white-text w-100 font-weight-bold py-2">Modifier le capteur de ID: @{{sensor_id}} </h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true" class="white-text">&times;</span>
                 </button>
@@ -217,14 +222,14 @@
             <div class="modal-body">
                 <div class="md-form-content-center ">
 
-                    <label data-error="wrong" data-success="right" for="form3">max_value</label>
+                    <label data-error="wrong" data-success="right" for="form3">Max_Valeur</label>
                     <input v-model="max_value" type="number" value="22" data-decimals="2" min="0" max="99" step="0.1"/>
 
                 </div>
 
                 <!--Footer-->
                 <div class="modal-footer justify-content-center">
-                    <a class="btn btn-outline-warning waves-effect"  role="button"  @click="updatevalue()" aria-pressed="true" data-dismiss="modal">Edit</a>
+                    <a class="btn btn-outline-warning waves-effect"  role="button"  @click="updatevalue()" aria-pressed="true" data-dismiss="modal">Edite</a>
                 </div>
             </div>
             <!--/.Content-->

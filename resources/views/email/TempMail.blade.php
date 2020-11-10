@@ -4,10 +4,9 @@
 Hello, {{ $username}}
 
 @component('mail::button', ['url' => ''])
-Visit your profile 
+Visiter votre profile 
 @endcomponent
 
-The sensor of {{ $type }} in {{$room_name}} room recorded a {{ $value }} as {{ $type }} at {{$measered_at}} and this record passed the max value defined by
-the user which is {{ $maxvalue}} ,So it is better to chech your room to avoid any accidents .<br>
+Le capteur {{ $type }} dans la chambre {{$room_name}} a enregistrer {{ $value }} comme {{ $type }} à {{$measered_at}}. Cette valeur a dépassé la valeur maximale définie par l'utulisateur,  {{ $maxvalue}}.<br>
 {{ config('app.name') }} Team .
 @endcomponent

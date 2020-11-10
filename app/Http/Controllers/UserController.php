@@ -17,6 +17,7 @@ class UserController extends Controller
                 'status' => 400
             ];
         }
+        else{
         $user = new User;
         $user->Firstname = $request->Firstname;
         $user->Lastname = $request->Lastname;
@@ -26,6 +27,9 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->type = $request->type;
         $user->save();
+
+        };
+
         $response = [
             'msg' => 'User Succsefully created',
             'success' => 1,
@@ -36,9 +40,9 @@ class UserController extends Controller
 
 
 
-    public function getUser(Request $request)
+    public function getUser($id)
     {
-        $user = User::where('user_id',$request->id)->first();
+        $user = User::where('id',$id)->first();
         if ($user) {
             $response = [
                 'msg' => 'User Details',
@@ -60,7 +64,7 @@ class UserController extends Controller
             ];
         }
 
-        return response()->json($response, $response['status']);
+        return response()->json($user);
         // return view('',compact('email'))
     }
     public function update(Request $request)
@@ -103,6 +107,29 @@ class UserController extends Controller
         
     }  
 
+
+    public function update2(Request $request)
+    {
+        User::where('id', $request->id)
+        ->update(
+            [
+                'Firstname' => $request->Firstname,
+                'Lastname' => $request->Lastname,
+                'phone' => $request->phone,
+                'email' => $request->email,
+                'email2' => $request->email2,
+                'address' => $request->address,
+                'city' => $request->city,
+                'country' => $request->country,
+                'zipcode' => $request->zipcode
+            ]);
+        $response = [
+            'msg' => 'user has been succefuly updated',
+            'success' => 1,
+            'status' => 200,
+        ];
+        return response()->json($response, $response['status']);
+    }
 
 
 }

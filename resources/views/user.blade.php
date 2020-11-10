@@ -88,12 +88,12 @@
                   </p>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item" href="user"><i class="now-ui-icons ui-2_settings-90"></i> Edit
-                    Profile</a>
+                  <a class="dropdown-item" href="user"><i class="now-ui-icons ui-2_settings-90"></i> Modifier le profile
+                    </a>
                   <a class="dropdown-item text-danger" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                     <i class="now-ui-icons ui-1_lock-circle-open"></i>
-                    {{ __('Log-out') }}
+                    {{ __('Déconnexion') }}
                   </a>
 
                   <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -107,76 +107,83 @@
       </nav>
       <div class="panel-header panel-header-sm">
       </div>
-<div class="content">
+<div class="content" id="adduser2">
+   <meta name="user_id" content="{{ Auth::user()->id }}">
         <div class="row">
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                <h5 class="title">Edit Profile</h5>
+                <h5 class="title">Modifier le profile</h5>
               </div>
               <div class="card-body">
                 <form>
                   <div class="row">
                   <div class="col-md-4 pl-1">
                       <div class="form-group">
-                        <label for="exampleInputEmail1">Email address 1</label>
-                        <input type="email" class="form-control" placeholder="Email">
+                        <label for="exampleInputEmail1">Email 1</label>
+                        <input v-model="email" type="email" class="form-control" placeholder="Email">
                       </div>
                     </div>
                    <div class="col-md-4 pl-1">
                       <div class="form-group">
-                        <label for="exampleInputEmail1">Email address 2</label>
-                        <input type="email" class="form-control" placeholder="Email">
+                        <label for="exampleInputEmail1">Email 2</label>
+                        <input v-model="email2" type="email" class="form-control" placeholder="Email">
+                      </div>
+                    </div>
+                    <div class="col-md-4 pl-1">
+                      <div class="form-group">
+                        <label for="phone">Téléphone</label>
+                        <input v-model="phone" type="number" class="form-control" placeholder="Téléphone">
                       </div>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-md-6 pr-1">
                       <div class="form-group">
-                        <label>First Name</label>
-                        <input type="text" class="form-control" placeholder="Company" value="Mike">
+                        <label>Nom</label>
+                        <input v-model="firstname" type="text" class="form-control" placeholder="Nom" >
                       </div>
                     </div>
                     <div class="col-md-6 pl-1">
                       <div class="form-group">
-                        <label>Last Name</label>
-                        <input type="text" class="form-control" placeholder="Last Name" value="Andrew">
+                        <label>Prénom</label>
+                        <input v-model="lastname" type="text" class="form-control" placeholder="Prénom" >
                       </div>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
-                        <label>Address</label>
-                        <input type="text" class="form-control" placeholder="Home Address" value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09">
+                        <label>Adresse</label>
+                        <input v-model="address" type="text" class="form-control" placeholder="Adresse" >
                       </div>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-md-4 pr-1">
                       <div class="form-group">
-                        <label>City</label>
-                        <input type="text" class="form-control" placeholder="City" value="Mike">
+                        <label>Ville</label>
+                        <input v-model="city" type="text" class="form-control" placeholder="Ville" value="Mike">
                       </div>
                     </div>
                     <div class="col-md-4 px-1">
                       <div class="form-group">
-                        <label>Country</label>
-                        <input type="text" class="form-control" placeholder="Country" value="Andrew">
+                        <label>Pays</label>
+                        <input v-model="country"type="text" class="form-control" placeholder="Pays" value="Andrew">
                       </div>
                     </div>
                     <div class="col-md-4 pl-1">
                       <div class="form-group">
-                        <label>Postal Code</label>
-                        <input type="number" class="form-control" placeholder="ZIP Code">
+                        <label>Code postale</label>
+                        <input v-model="zipcode" type="number" class="form-control" placeholder="Code postale">
                       </div>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-md-12">
-                      <button type="submit" class="btn btn-danger btn-round btn-lg" >  
-                        Save Changes <i class="now-ui-icons ui-1_send"></i></button>
-                      <button type="reset" class="btn btn-secondary btn-round btn-lg" > Cancel <i class="now-ui-icons ui-1_simple-remove"></i></button>
+                      <button type="submit" class="btn btn-danger btn-round btn-lg" @click="edit()" >  
+                        Enregistrer <i class="now-ui-icons ui-1_send" ></i></button>
+                      <button type="reset" class="btn btn-secondary btn-round btn-lg" > Annuler <i class="now-ui-icons ui-1_simple-remove"></i></button>
                     </div>
                   </div>
                 </form>

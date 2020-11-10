@@ -15,7 +15,7 @@
                 <div class="card text-white bg-danger mb-3 py-5" style="max-width: 27rem;">
                   <div class="card-body">
                     <i class='fas fa-user-friends' style='font-size:24px'></i>
-                    <h5 class="card-title">superviseurs</h5>
+                    <h5 class="card-title">Utilisateurs</h5>
                     <p class="card-text">
                     </p>
                   </div>

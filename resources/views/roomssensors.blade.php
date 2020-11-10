@@ -3,8 +3,8 @@
 
 <head>
   <meta charset="utf-8" />
-  <link rel="apple-touch-icon" sizes="76x76" href="assets/img/nx.png">
-  <link rel="icon" type="image/png" href="assets/img/nx.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="{{ URL::asset('assets/img/nx.png') }}">
+  <link rel="icon" type="image/png" href="{{ URL::asset('assets/img/nx.png') }}">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
     NEXT MOVE
@@ -27,7 +27,7 @@
     -->
       <div class="logo">
         <a href="home" class="simple-text logo-mini">
-        <img src="assets/img/nx.png" alt="next move logo" width="100" height="35">
+        <img src="{{ URL::asset('assets/img/nx.png') }}" alt="next move logo" width="100" height="35">
         </a>
         <a href="home" class="simple-text logo-normal">
           NEXT MOVE
@@ -45,7 +45,7 @@
           <li>
             <a href="superviseurs">
               <i class='fas fa-user-friends' style='font-size:20px'></i>
-              <p>Superviseurs</p>
+              <p>Utilisateurs</p>
             </a>
           </li>
           <li>
@@ -113,12 +113,11 @@
                   </p>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item" href="user"><i class="now-ui-icons ui-2_settings-90"></i> Edit
-                    Profile</a>
+                  <a class="dropdown-item" href="user"><i class="now-ui-icons ui-2_settings-90"></i> Modifier le profile</a>
                   <a class="dropdown-item text-danger" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                     <i class="now-ui-icons ui-1_lock-circle-open"></i>
-                    {{ __('Log-out') }}
+                    {{ __('Déconnexion') }}
                   </a>
 
                   <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -140,9 +139,8 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-md-12">
-                            <h5>Sensors of Room ID: {{$room_id}}
-                                <button class="btn btn-info pull-right" data-toggle="modal" data-target="#addsensor"><span class="glyphicon glyphicon-plus"></span> Add
-                                    New Sensor +</button>
+                            <h5>Capteur de la chambre: {{$room_id}}
+                                <button class="btn btn-info pull-right" data-toggle="modal" data-target="#addsensor"><span class="glyphicon glyphicon-plus"></span> Ajuter un nouvel Capteur +</button>
                             </h5>
                         </div>
                     </div>
@@ -151,12 +149,12 @@
                 <table class="table table-striped" id="getallsensors">
                         <thead>
                             <tr>
-                                <th >Sensor ID</th>
+                                <th >Capteur ID</th>
                                 <th scope="col">Type</th>
                                 <th scope="col">Chart</th>
                                 <th scope="col">PDF</th>
-                                <th scope="col">Max_Value</th>
-                                <th scope="col">created_at</th>                           
+                                <th scope="col">Max_Valeur</th>
+                                <th scope="col">Ajouter_le</th>                           
                                 <th scope="col">Actions</th>
                             </tr>
                         </thead>
@@ -169,17 +167,17 @@
                                   <div class="dropdown no-arrow">
                                   <button class="btn btn-danger" @click="passsid(sensor.sensor_id)" data-toggle="dropdown"id="dropdownMenuLink" data-target="#showpdf"><i style="font-size:20px" class="fa">&#xf1c1;</i> </button>
                                   <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(74px, 31px, 0px);">
-                                    <a class="dropdown-item" @click="get_1j_pdf(sensor.sensor_id)"  >Today</a>
-                                    <a class="dropdown-item" @click="get_7j_pdf(sensor.sensor_id)"  >Week</a>
-                                    <a class="dropdown-item" @click="get_30j_pdf(sensor.sensor_id)" >Month</a>
+                                    <a class="dropdown-item" @click="get_1j_pdf(sensor.sensor_id)"  >Aujourd'hui<</a>
+                                    <a class="dropdown-item" @click="get_7j_pdf(sensor.sensor_id)"  >Semaine</a>
+                                    <a class="dropdown-item" @click="get_30j_pdf(sensor.sensor_id)" >Mois</a>
                                 </div>
                                   {{-- <div class="dropdown no-arrow">
                                     <a class="dropdown-toggle btn btn-primary btn-sm" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Select Periode </a>
+                                    Sélectionnez la Periode </a>
                                     <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(74px, 31px, 0px);">
-                                        <a class="dropdown-item" @click="get_1j_values()"  >Today</a>
-                                        <a class="dropdown-item" @click="get_7j_values()"  >Week</a>
-                                        <a class="dropdown-item" @click="get_30j_values()" >Month</a>
+                                        <a class="dropdown-item" @click="get_1j_values()"  >Aujourd'hui<</a>
+                                        <a class="dropdown-item" @click="get_7j_values()"  >Semaine</a>
+                                        <a class="dropdown-item" @click="get_30j_values()" >Mois</a>
                                     </div>
                                   </div> --}}
                                 </td>
@@ -208,14 +206,14 @@
 
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title w-100" id="myModalLabel">Sensor of ID: @{{sensor_id}}---->@{{title}}</h4>
+        <h4 class="modal-title w-100" id="myModalLabel">Capteur de ID: @{{sensor_id}}---->@{{title}}</h4>
         <div class="dropdown no-arrow">
           <a class="dropdown-toggle btn btn-primary btn-sm" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Select Periode </a>
+          Sélectionnez la Periode </a>
           <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(74px, 31px, 0px);">
-              <a class="dropdown-item" @click="get_1j_values()"  >Today</a>
-              <a class="dropdown-item" @click="get_7j_values()"  >Week</a>
-              <a class="dropdown-item" @click="get_30j_values()" >Month</a>
+              <a class="dropdown-item" @click="get_1j_values()"  >Aujourd'hui</a>
+              <a class="dropdown-item" @click="get_7j_values()"  >Semaine</a>
+              <a class="dropdown-item" @click="get_30j_values()" >Mois</a>
           </div>
         </div>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -238,7 +236,7 @@
         <div class="modal-content">
             <!--Header-->
             <div class="modal-header text-center">
-                <h4 class="modal-title white-text w-100 font-weight-bold py-2">Edit Sensor of ID: @{{sensor_id}}</h4>
+                <h4 class="modal-title white-text w-100 font-weight-bold py-2">Editer capteur de ID: @{{sensor_id}}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true" class="white-text">&times;</span>
                 </button>
@@ -248,22 +246,22 @@
             <div class="modal-body">
                 <div class="md-form ">
 
-                    <label data-error="wrong" data-success="right" for="form3">max_value</label>
+                    <label data-error="wrong" data-success="right" for="form3">Max_Valeur</label>
                     <input type="text" v-model="max_value" class="form-control validate">
                 </div>
 
                 <div class="form-group">
-                  <label for="exampleFormControlSelect2" >Select Type</label>
+                  <label for="exampleFormControlSelect2" >Sélectionnez le Type</label>
                   <select class="form-control" id="exampleFormControlSelect2" v-model="type">
                     <option>Temperature</option>
-                    <option>Humididty </option>
-                    <option>Motion </option>
+                    <option>Humidité </option>
+                    <option>Mouvement </option>
                   </select>
                 </div>
 
                 <!--Footer-->
                 <div class="modal-footer justify-content-center">
-                    <a class="btn btn-outline-warning waves-effect"  role="button"  @click="editsensor()" aria-pressed="true" data-dismiss="modal">Edit</a>
+                    <a class="btn btn-outline-warning waves-effect"  role="button"  @click="editsensor()" aria-pressed="true" data-dismiss="modal">Edite</a>
                 </div>
             </div>
             <!--/.Content-->
@@ -280,7 +278,7 @@
         <div class="modal-content">
             <!--Header-->
             <div class="modal-header text-center">
-                <h4 class="modal-title white-text w-100 font-weight-bold py-2">Delete Sensor of ID: @{{sensor_id}}</h4>
+                <h4 class="modal-title white-text w-100 font-weight-bold py-2">Supprimer le Capteur: @{{sensor_id}}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true" class="white-text">&times;</span>
                 </button>
@@ -288,13 +286,13 @@
 
             <!--Body-->
             <div class="modal-body">
-                <p class="font-weight-bold text-center">Are you sure that you want to delete this Sensor ?</p>
+                <p class="font-weight-bold text-center">Etes-vous sùr de vouloir supprimer ce Capteur ?</p>
             </div>
 
             <!--Footer-->
             <div class="modal-footer justify-content-center">
-                <a class="btn btn-danger btn-lg active"  role="button"  @click="removesensor()" aria-pressed="true" data-dismiss="modal">Yes</a>
-                <a class="btn btn-success btn-lg active" role="button" aria-pressed="true" data-dismiss="modal">Cancel</a>  
+                <a class="btn btn-danger btn-lg active"  role="button"  @click="removesensor()" aria-pressed="true" data-dismiss="modal">Oui</a>
+                <a class="btn btn-success btn-lg active" role="button" aria-pressed="true" data-dismiss="modal">Annuler</a>  
                 
             </div>
         </div>
@@ -312,7 +310,7 @@
         <div class="modal-content">
             <!--Header-->
             <div class="modal-header text-center">
-                <h4 class="modal-title white-text w-100 font-weight-bold py-2">Add a new Sensor</h4>
+                <h4 class="modal-title white-text w-100 font-weight-bold py-2">Ajouter un nouvel capteur</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true" class="white-text">&times;</span>
                 </button>
@@ -322,22 +320,22 @@
             <div class="modal-body">
 
                 <div class="md-form ">
-                    <label data-error="wrong" data-success="right" for="form2">Max Value</label>
+                    <label data-error="wrong" data-success="right" for="form2">Max Valeur</label>
                     <input type="float" v-model="max_value" class="form-control validate">
                 </div>       
 
                 <div class="form-group">
-                  <label for="exampleFormControlSelect2" >Select Type</label>
+                  <label for="exampleFormControlSelect2" >Sélectionnez le Type</label>
                   <select class="form-control" id="exampleFormControlSelect2" v-model="type">
                     <option>Temperature</option>
-                    <option>Humididty </option>
-                    <option>Motion </option>
+                    <option>Humidité </option>
+                    <option>Mouvement </option>
                   </select>
                 </div>
 
                 <!--Footer-->
                 <div class="modal-footer justify-content-center">
-                    <a class="btn btn-outline-warning waves-effect"  role="button"  @click="creatsensor()" aria-pressed="true" data-dismiss="modal">Add</a>
+                    <a class="btn btn-outline-warning waves-effect"  role="button"  @click="creatsensor()" aria-pressed="true" data-dismiss="modal">Ajouter</a>
                 </div>
             </div>
         </div>

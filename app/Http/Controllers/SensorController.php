@@ -154,6 +154,63 @@ class SensorController extends Controller
         
     }
 
+
+
+    public function get_total_value($sensor_id)
+    {
+
+        if(Temperatureval::where('sensor_id', $sensor_id)->first()){
+            $val = Temperatureval::where('sensor_id', $sensor_id)->get();
+    
+            return $val;
+
+        }
+        elseif(Humidityval::where('sensor_id', $sensor_id)->first()){
+            $val = Humidityval::where('sensor_id', $sensor_id)->get();
+    
+            return $val;
+
+        }
+        elseif(Motionval::where('sensor_id', $sensor_id)->first()){
+            $val = Motionval::where('sensor_id', $sensor_id)->get();
+    
+            return $val;
+
+        }
+        else{
+            return response()->json('there is no mesure for this sensor id ');
+        }
+        
+    }
+
+
+    public function get_custom_value($sensor_id,$from,$to)
+    {
+
+        if(Temperatureval::where('sensor_id', $sensor_id)->first()){
+            $val = Temperatureval::where('sensor_id', $sensor_id)->where('created_at', '>=', $from)->where('created_at', '<', $to)->get();
+    
+            return $val;
+
+        }
+        elseif(Humidityval::where('sensor_id', $sensor_id)->first()){
+            $val = Temperatureval::where('sensor_id', $sensor_id)->where('created_at', '>=', $from)->where('created_at', '<', $to)->get();
+    
+            return $val;
+
+        }
+        elseif(Motionval::where('sensor_id', $sensor_id)->first()){
+            $val = Temperatureval::where('sensor_id', $sensor_id)->where('created_at', '>=', $from)->where('created_at', '<', $to)->get();
+    
+            return $val;
+
+        }
+        else{
+            return response()->json('there is no mesure for this sensor id ');
+        }
+        
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -257,7 +314,66 @@ class SensorController extends Controller
             return $vals;
 
         }
+    
     }
+
+
+
+    public function getroomsvaltotal($sensor_id)
+        
+    {
+        if(Temperatureval::where('sensor_id', $sensor_id)->first()){
+            $val = Temperatureval::where('sensor_id', $sensor_id)->get();
+    
+            return $val;
+    
+        }
+        elseif(Humidityval::where('sensor_id', $sensor_id)->first()){
+            $val = Humidityval::where('sensor_id', $sensor_id)->get();
+    
+            return $val;
+    
+        }
+        elseif(Motionval::where('sensor_id', $sensor_id)->first()){
+            $val = Motionval::where('sensor_id', $sensor_id)->get();
+    
+            return $val;
+    
+        }
+        else{
+            return response()->json('there is no mesure for this sensor id ');
+        }
+    
+    }
+
+
+    public function getroomsvalcustom($sensor_id,$from,$to)
+        
+    {
+        if(Temperatureval::where('sensor_id', $sensor_id)->first()){
+            $val = Temperatureval::where('sensor_id', $sensor_id)->where('created_at', '>=', $from)->where('created_at', '<=', $to)->get();
+    
+            return $val;
+
+        }
+        elseif(Humidityval::where('sensor_id', $sensor_id)->first()){
+            $val = Temperatureval::where('sensor_id', $sensor_id)->where('created_at', '>=', $from)->where('created_at', '<=', $to)->get();
+    
+            return $val;
+
+        }
+        elseif(Motionval::where('sensor_id', $sensor_id)->first()){
+            $val = Temperatureval::where('sensor_id', $sensor_id)->where('created_at', '>=', $from)->where('created_at', '<', $to)->get();
+    
+            return $val;
+
+        }
+        else{
+            return response()->json('there is no mesure for this sensor id ');
+        }
+    }
+
+
 
 
     public function pdf($sensor_id, $days)
@@ -265,6 +381,25 @@ class SensorController extends Controller
         $pdf = \App::make('dompdf.wrapper');
         $now= carbon::now();
         $sensorData = $this->getroomsval($sensor_id, $days);
+        $pdf = PDF::loadView('records', compact('sensorData','now'));
+        return $pdf->stream("records.pdf");
+    }
+
+
+    public function pdftotal($sensor_id)
+    {
+        $pdf = \App::make('dompdf.wrapper');
+        $now= carbon::now();
+        $sensorData = $this->getroomsvaltotal($sensor_id);
+        $pdf = PDF::loadView('records', compact('sensorData','now'));
+        return $pdf->stream("records.pdf");
+    }
+
+    public function pdfcustom($sensor_id,$from,$to)
+    {
+        $pdf = \App::make('dompdf.wrapper');
+        $now= carbon::now();
+        $sensorData = $this->getroomsvalcustom($sensor_id,$from,$to);
         $pdf = PDF::loadView('records', compact('sensorData','now'));
         return $pdf->stream("records.pdf");
     }

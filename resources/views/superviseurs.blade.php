@@ -41,11 +41,16 @@
               <p>Dashboard</p>
             </a>
           </li>
-
+          <li >
+            <a href="user">
+              <i class="now-ui-icons design_app"></i>
+              <p>Modifier le profile </p>
+            </a>
+          </li>
           <li>
             <a href="superviseurs">
               <i class='fas fa-user-friends' style='font-size:20px'></i>
-              <p>Superviseurs</p>
+              <p>Utilisateurs</p>
             </a>
           </li>
           <li>
@@ -113,12 +118,11 @@
                   </p>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item" href="user"><i class="now-ui-icons ui-2_settings-90"></i> Edit
-                    Profile</a>
+                  <a class="dropdown-item" href="user"><i class="now-ui-icons ui-2_settings-90"></i> Modifier le profile</a>
                   <a class="dropdown-item text-danger" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                     <i class="now-ui-icons ui-1_lock-circle-open"></i>
-                    {{ __('Log-out') }}
+                    {{ __('Déconnexion') }}
                   </a>
 
                   <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -139,9 +143,9 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-md-12">
-                            <h5>Supervisors
+                            <h5>utilisateurs
                                 <button class="btn btn-info pull-right" data-toggle="modal" data-target="#adduser"><span class="glyphicon glyphicon-plus"></span> Add
-                                    new client +</button>
+                                    nouvel utilisateur +</button>
                             </h5>
                         </div>
                     </div>
@@ -151,12 +155,12 @@
                         <thead>
                             <tr>
                                 <th scope="col">Id</th>
-                                <th scope="col">First Name</th>
-                                <th scope="col">Last Name</th>
+                                <th scope="col">Nom</th>
+                                <th scope="col">Prénom</th>
                                 <th scope="col">Email</th>
-                                <th scope="col">Phone</th>
+                                <th scope="col">Téléphone</th>
                                 <th scope="col">Type</th>
-                                <th scope="col">Created_at</th>
+                                <th scope="col">Ajouter_le</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
@@ -191,7 +195,7 @@
         <div class="modal-content">
             <!--Header-->
             <div class="modal-header text-center">
-                <h4 class="modal-title white-text w-100 font-weight-bold py-2">edit supervisor</h4>
+                <h4 class="modal-title white-text w-100 font-weight-bold py-2">Modifier un utilisateur</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true" class="white-text">&times;</span>
                 </button>
@@ -201,13 +205,13 @@
             <div class="modal-body">
                 <div class="md-form ">
                     <i class="fas fa-user prefix grey-text"></i>
-                    <label data-error="wrong" data-success="right" for="form3">First name</label>
+                    <label data-error="wrong" data-success="right" for="form3">Nom</label>
                     <input type="text" id="firstname" class="form-control validate" v-model="Firstname">
                 </div>
 
                 <div class="md-form ">
                     <i class="fas fa-user prefix grey-text"></i>
-                    <label data-error="wrong" data-success="right" for="form3">Last name</label>
+                    <label data-error="wrong" data-success="right" for="form3">Prénom</label>
                     <input type="text" v-model="Lastname" id="lastname" class="form-control validate">
                 </div>
 
@@ -219,7 +223,7 @@
 
                 <div class="md-form ">
                     <i class="fas fa-envelope prefix grey-text"></i>
-                    <label data-error="wrong" data-success="right" for="form2">Phone Number</label>
+                    <label data-error="wrong" data-success="right" for="form2">Téléphone</label>
                     <input type="text" v-model="phone" id="PhoneN" class="form-control validate">
                 </div>
 
@@ -231,7 +235,7 @@
 
                 <div class="md-form ">
                     <i class="fas fa-envelope prefix grey-text"></i>
-                    <label data-error="wrong" data-success="right" for="form2">Password</label>
+                    <label data-error="wrong" data-success="right" for="form2">Mot de passe</label>
                     <input type="text" v-model="password" id="Password" class="form-control validate">
                 </div>
             </div>
@@ -256,8 +260,8 @@
 
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title w-100" id="myModalLabel">ROOMS</h4>
-        <button type="button" class="btn btn-info "  data-toggle="modal" data-target="#addnewroom"><span class="glyphicon glyphicon-plus"></span> + New Room </button>
+        <h4 class="modal-title w-100" id="myModalLabel">Chambres</h4>
+        <button type="button" class="btn btn-info "  data-toggle="modal" data-target="#addnewroom"><span class="glyphicon glyphicon-plus"></span> + Nouvelle Chambre </button>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -266,9 +270,9 @@
         <table class="table table-striped" >
             <thead>
                 <tr>
-                    <th scope="col">Room ID</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">owner id</th>
+                    <th scope="col">Chambre ID</th>
+                    <th scope="col">nom</th>
+                    <th scope="col">Propriétaire id</th>
                     <th scope="col">Temp MAX</th>
                     <th scope="col">Humi MAX</th>                                 
                     <th scope="col">Actions</th>
@@ -305,7 +309,7 @@
         <div class="modal-content"> 
 <!--Header-->
 <div class="modal-header text-center">
-                <h4 class="modal-title white-text w-100 font-weight-bold py-2">delete supervisor</h4>
+                <h4 class="modal-title white-text w-100 font-weight-bold py-2">Supprimer un utilisateur</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true" class="white-text">&times;</span>
                 </button>
@@ -313,13 +317,13 @@
 
 <!--Body-->
 <div class="modal-body">
-                <p class="font-weight-bold text-center">Are you sure that you want to delete this supervisor?</p>
+                <p class="font-weight-bold text-center">Etes-vous sùr de vouloir supprimer cet utilisateur?</p>
             </div> 
 
 <!--Footer-->
  <div class="modal-footer justify-content-center">
-                <a class="btn btn-danger btn-lg active"  role="button"  @click="removeuser()" aria-pressed="true" data-dismiss="modal">Yes</a>
-                <a class="btn btn-success btn-lg active " role="button" aria-pressed="true" data-dismiss="modal">Cancel</a>
+                <a class="btn btn-danger btn-lg active"  role="button"  @click="removeuser()" aria-pressed="true" data-dismiss="modal">Oui</a>
+                <a class="btn btn-success btn-lg active " role="button" aria-pressed="true" data-dismiss="modal">Annuler</a>
             </div>
         </div> 
 <!--/.Content-->
@@ -336,7 +340,7 @@
         <div class="modal-content">
             <!--Header-->
             <div class="modal-header text-center">
-                <h4 class="modal-title white-text w-100 font-weight-bold py-2">Add a new supervisor</h4>
+                <h4 class="modal-title white-text w-100 font-weight-bold py-2">Ajouter un nouvel utilisateur</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true" class="white-text">&times;</span>
                 </button>
@@ -346,13 +350,13 @@
             <div class="modal-body">
                 <div class="md-form ">
                     <i class="fas fa-user prefix grey-text"></i>
-                    <label data-error="wrong" data-success="right" for="form3">First name</label>
+                    <label data-error="wrong" data-success="right" for="form3">Nom</label>
                     <input v-model="firstname" type="text" id="firstname1" class="form-control validate">
                 </div>
 
                 <div class="md-form ">
                     <i class="fas fa-user prefix grey-text"></i>
-                    <label data-error="wrong" data-success="right" for="form3">Last name</label>
+                    <label data-error="wrong" data-success="right" for="form3">Prénon</label>
                     <input v-model="lastname" type="text" id="lastname1" class="form-control validate">
                 </div>
 
@@ -364,7 +368,7 @@
 
                 <div class="md-form ">
                     <i class="fas fa-phone prefix grey-text"></i>
-                    <label data-error="wrong" data-success="right" for="form2">Phone Number</label>
+                    <label data-error="wrong" data-success="right" for="form2">Téléphone</label>
                     <input v-model="phone" type="text" id="PhoneN1" class="form-control validate">
                 </div>
 
@@ -377,15 +381,15 @@
 
                 <div class="md-form ">
                     <i class="fas fa-key prefix grey-text"></i>
-                    <label data-error="wrong" data-success="right" for="form2">password</label>
+                    <label data-error="wrong" data-success="right" for="form2">Mot de passe</label>
                     <input v-model="password" type="password" id="password" class="form-control validate">
                 </div>
             </div>
 
             <!--Footer-->
             <div class="modal-footer justify-content-center">
-                <a class="btn btn-outline-warning waves-effect  " role="button"  @click="creatuser()" aria-pressed="true" data-dismiss="modal">Add</a>
-            </div>
+                    <a class="btn btn-outline-warning waves-effect"  role="button"  @click="creatuser()" aria-pressed="true" data-dismiss="modal">Ajouter</a>
+                </div>
         </div>
      </div>
 </div>
@@ -396,7 +400,7 @@
         <div class="modal-content">
             <!--Header-->
             <div class="modal-header text-center">
-                <h4 class="modal-title white-text w-100 font-weight-bold py-2">Edit Room</h4>
+                <h4 class="modal-title white-text w-100 font-weight-bold py-2">Modifier la chambre</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true" class="white-text">&times;</span>
                 </button>
@@ -406,7 +410,7 @@
             <div class="modal-body">
                 <div class="md-form ">
 
-                    <label data-error="wrong" data-success="right" for="form3">name</label>
+                    <label data-error="wrong" data-success="right" for="form3">Nom</label>
                     <input type="text" v-model="name" class="form-control validate">
                 </div>
 
@@ -418,12 +422,12 @@
 
                 <div class="md-form ">
 
-                    <label data-error="wrong" data-success="right" for="form2">Humidity MAX</label>
+                    <label data-error="wrong" data-success="right" for="form2">Humidité MAX</label>
                     <input type="text" v-model="maxhumidity" class="form-control validate">
                 </div>
                 <!--Footer-->
                 <div class="modal-footer justify-content-center">
-                    <a class="btn btn-outline-warning waves-effect"  role="button"  @click="editroom()" aria-pressed="true" data-dismiss="modal">Edit</a>
+                    <a class="btn btn-outline-warning waves-effect"  role="button"  @click="editroom()" aria-pressed="true" data-dismiss="modal">Editer</a>
                 </div>
             </div>
             <!--/.Content-->
@@ -440,7 +444,7 @@
         <div class="modal-content">
             <!--Header-->
             <div class="modal-header text-center">
-                <h4 class="modal-title white-text w-100 font-weight-bold py-2">Delete Room</h4>
+                <h4 class="modal-title white-text w-100 font-weight-bold py-2">Supprimer une chambre</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true" class="white-text">&times;</span>
                 </button>
@@ -448,13 +452,13 @@
 
             <!--Body-->
             <div class="modal-body">
-                <p class="font-weight-bold text-center">Are you sure that you want to delete this Room?</p>
+                <p class="font-weight-bold text-center">Etes-vous sùr de vouloir supprimer cette chambre?</p>
             </div>
 
             <!--Footer-->
             <div class="modal-footer justify-content-center">
-                <a class="btn btn-danger btn-lg active"  role="button"  @click="removeroom()" aria-pressed="true" data-dismiss="modal">Yes</a>
-                <a class="btn btn-success btn-lg active " role="button" aria-pressed="true" data-dismiss="modal">Cancel</a>
+                <a class="btn btn-danger btn-lg active"  role="button"  @click="removeroom()" aria-pressed="true" data-dismiss="modal">Oui</a>
+                <a class="btn btn-success btn-lg active " role="button" aria-pressed="true" data-dismiss="modal">Annuler</a>
             </div>
         </div>
         <!--/.Content-->
@@ -471,7 +475,7 @@
         <div class="modal-content">
             <!--Header-->
             <div class="modal-header text-center">
-                <h4 class="modal-title white-text w-100 font-weight-bold py-2">Add a new Room</h4>
+                <h4 class="modal-title white-text w-100 font-weight-bold py-2">Ajouter une nouvelle chambre</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true" class="white-text">&times;</span>
                 </button>
@@ -480,7 +484,7 @@
             <!--Body-->
             <div class="modal-body">
                 <div class="md-form ">
-                    <label data-error="wrong" data-success="right" for="form3">Room Name</label>
+                    <label data-error="wrong" data-success="right" for="form3">Nom </label>
                     <input type="text" v-model="name" id="roomname1" class="form-control validate">
                 </div>
 
@@ -490,13 +494,13 @@
                 </div>
 
                 <div class="md-form ">
-                    <label data-error="wrong" data-success="right" for="form2">Humidity MAX</label>
+                    <label data-error="wrong" data-success="right" for="form2">Humidité MAX</label>
                     <input type="text" v-model="maxhumidity" value="-100" class="form-control validate">
                 </div>
 
                 <!--Footer-->
                 <div class="modal-footer justify-content-center">
-                    <a class="btn btn-outline-warning waves-effect  " role="button"  @click="creatroom()" aria-pressed="true" data-dismiss="modal">Add</a>
+                    <a class="btn btn-outline-warning waves-effect  " role="button"  @click="creatroom()" aria-pressed="true" data-dismiss="modal">Ajouter</a>
                 </div>
     <footer class="footer">
         <div class=" container-fluid ">

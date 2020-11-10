@@ -22,6 +22,7 @@ Route::post('user', 'UserController@create');
 Route::get('getuser/{id}', 'UserController@getUser');
 Route::get('getusers', 'UserController@getall');
 Route::patch('patchuser', 'UserController@update');
+Route::patch('patchuser2', 'UserController@update2');
 Route::delete('deleteuser/{id}', 'UserController@delete');
 Route::post('createroom', 'RoomController@create');
 Route::get('getrooms/{user_id}', 'RoomController@getrooms');
@@ -49,6 +50,9 @@ Route::get('get_24h_value/{room_id}', 'SensorController@get_24h_value');
 Route::get('get_7j_value/{room_id}', 'SensorController@get_7j_value'); 
 Route::get('get_30j_value/{room_id}', 'SensorController@get_30j_value'); 
 Route::get('/sensorPdf/{sensor_id}/{days}', 'SensorController@pdf');
+Route::get('/sensorPdftotal/{sensor_id}', 'SensorController@pdftotal');
+Route::get('/sensorPdfcustom/{sensor_id}/{from}/{to}', 'SensorController@pdfcustom');
+Route::post('/createuser2', 'User2Controller@create');
 
 
 

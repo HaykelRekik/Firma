@@ -22,9 +22,14 @@ class User2Controller extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $user2 = new user2;
+        $user2->firstname = $request->Firstname;
+        $user2->lastname = $request->Lastname;
+        $user2->phone = $request->phone;
+        $user2->email1 = $request->email;
+        $user2->save();
     }
 
     /**
@@ -46,7 +51,8 @@ class User2Controller extends Controller
      */
     public function show($id)
     {
-        //
+        $user2 = user2::where('id',$id)->first();
+        return response()->json($user2);
     }
 
     /**
@@ -55,9 +61,21 @@ class User2Controller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
-        //
+        user2::where('id', $request->id)
+        ->update(
+            [
+                'firstname' => $request->firstname,
+                'lastname' => $request->lastname,
+                'phone' => $request->phone,
+                'email1' => $request->email1,
+                'email2' => $request->email2,
+                'address' => $request->address,
+                'city' => $request->city,
+                'country' => $request->country,
+                'zipcode' => $request->zipcode,
+            ]);
     }
 
     /**

@@ -45,7 +45,7 @@
                     <li>
                         <a href="user">
                             <i class="now-ui-icons users_single-02"></i>
-                            <p>User Profile</p>
+                            <p>Profile</p>
                         </a>
                     </li>
                 </ul>
@@ -95,12 +95,11 @@
                                     </p>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                                    <a class="dropdown-item" href="user"><i class="now-ui-icons ui-2_settings-90"></i> Edit
-                                        Profile</a>
+                                    <a class="dropdown-item" href="user"><i class="now-ui-icons ui-2_settings-90"></i> Modifier le profile</a>
                                     <a class="dropdown-item text-danger" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         <i class="now-ui-icons ui-1_lock-circle-open"></i>
-                                        {{ __('Log-out') }}
+                                        {{ __('Déconnexion') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -126,17 +125,8 @@
                 <!-- ROOM CARD  -->
                 <div class="card bg-white mb-4 mx-2 text-center" style="max-width: 20rem;" v-for="room in rooms">
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                        <h6 class="m-0 font-weight-bold text-danger ">Created at :</h6>
+                        <h6 class="m-0 font-weight-bold text-danger ">Ajouter le :</h6>
                         <h6>@{{ room.created_at }} </h6>
-                        <div class="dropdown">
-                            <button type="button" class="btn btn-round btn-outline-default dropdown-toggle btn-simple btn-icon no-caret" data-toggle="dropdown">
-                                <i class="now-ui-icons loader_gear"></i>
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="#" @click="passid(room.room_id)" data-toggle="modal" data-target="#editeroom">Edit Name </a>
-                                <a class="dropdown-item text-danger" href="#" @click="passid(room.room_id)" data-toggle="modal" data-target="#deleteroomc">Remove Room</a>
-                            </div>
-                        </div>
                     </div>
                     <div class="card-body">
                         <h5 class="card-title">
@@ -147,53 +137,10 @@
                         <span class="icon text-white-50">
                             <i class="fas fa-arrow-right"></i>
                         </span>
-                        <span class="text">GO THERE</span>
+                        <span class="text">Visiter</span>
                     </a>
                 </div>
                 <!-- END ROOM CARD  -->
-            </div>
-            <!-- <------------------------delete modal---------------------- -->
-
-            <div class="modal fade" id="deleteroomc" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" style="display: none;" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalCenterTitle">Delete Room</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">×</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            are you sure you want to delete this room
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" @click="deleteroom()" data-dismiss="modal">Delete</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- <------------------------edite modal---------------------- -->
-
-            <div class="modal fade" id="editeroom" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" style="display: none;" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalCenterTitle">Edite Room</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">×</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <input type="text" class="form-control" id="Inputname" aria-describedby="room name" placeholder="Room Name" v-model="name">
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" @click="editroom()" data-dismiss="modal">Edit</button>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
